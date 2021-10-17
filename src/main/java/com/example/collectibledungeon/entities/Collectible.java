@@ -16,7 +16,8 @@ public class Collectible {
     private Long id;
 
     private String name, description, scale, material;
-    private Double height, price, code, stock;
+    private float height, price;
+    private int code, stock;
     private boolean active;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -26,5 +27,4 @@ public class Collectible {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_producer", nullable = false)
     private Producer producer;
-
 }

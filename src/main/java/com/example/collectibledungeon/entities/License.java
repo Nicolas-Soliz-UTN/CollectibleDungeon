@@ -16,8 +16,8 @@ public class License {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private String founder, owner, country;
-    private Integer year;
+    private String name, founder, owner, country;
+    private int year;
     private boolean active;
 
     @OneToMany(mappedBy = "license")
