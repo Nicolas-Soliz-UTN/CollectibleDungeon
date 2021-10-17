@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Builder
 public class Collectible {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -20,11 +20,11 @@ public class Collectible {
     private int code, stock;
     private boolean active;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "fk_license", nullable = false)
     private License license;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "fk_producer", nullable = false)
     private Producer producer;
 }

@@ -7,12 +7,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CollectibleRepository extends JpaRepository<Collectible, Long> {
-    @Query(value = "SELECT * FROM collectibles WHERE collectibles.active = true", nativeQuery = true)
+    @Query(value = "SELECT * FROM collectible WHERE collectible.active = true", nativeQuery = true)
     List<Collectible> findAllByActive();
 
-    @Query(value = "SELECT * FROM collectibles WHERE collectibles.active = true && collectibles.id = :id", nativeQuery = true)
-    List<Collectible> findAllByIdAndActive(@Param("id") long id);
+    @Query(value = "SELECT * FROM collectible WHERE collectible.active = true && collectible.id = :id", nativeQuery = true)
+    Optional<Collectible> findAllByIdAndActive(@Param("id") long id);
 }

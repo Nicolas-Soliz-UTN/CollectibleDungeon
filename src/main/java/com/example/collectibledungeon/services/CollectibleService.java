@@ -78,4 +78,24 @@ public class CollectibleService implements BaseService<Collectible> {
             throw new Exception(e.getMessage());
         }
     }
+
+    @Transactional
+    public List<Collectible> findAllByActive() throws Exception {
+        try {
+            List<Collectible> collectibles = repository.findAllByActive();
+            return collectibles;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Transactional
+    public Collectible findAllByIdAndActive(long id) throws Exception {
+        try {
+            Optional<Collectible> opt = repository.findAllByIdAndActive(id);
+            return opt.get();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
 }
