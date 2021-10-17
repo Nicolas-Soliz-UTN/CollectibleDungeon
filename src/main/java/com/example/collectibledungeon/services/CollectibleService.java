@@ -1,7 +1,7 @@
 package com.example.collectibledungeon.services;
 
-import com.example.collectibledungeon.entities.Collectable;
-import com.example.collectibledungeon.repositories.CollectableRepository;
+import com.example.collectibledungeon.entities.Collectible;
+import com.example.collectibledungeon.repositories.CollectibleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,17 +10,17 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CollectableService implements BaseService<Collectable> {
+public class CollectibleService implements BaseService<Collectible> {
 
     @Autowired
-    private CollectableRepository repository;
+    private CollectibleRepository repository;
 
     @Override
     @Transactional
-    public List<Collectable> findAll() throws Exception {
+    public List<Collectible> findAll() throws Exception {
         try {
-            List<Collectable> collectables = repository.findAll();
-            return collectables;
+            List<Collectible> collectibles = repository.findAll();
+            return collectibles;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -28,9 +28,9 @@ public class CollectableService implements BaseService<Collectable> {
 
     @Override
     @Transactional
-    public Collectable findById(long id) throws Exception {
+    public Collectible findById(long id) throws Exception {
         try {
-            Optional<Collectable> opt = repository.findById(id);
+            Optional<Collectible> opt = repository.findById(id);
             return opt.get();
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -39,10 +39,10 @@ public class CollectableService implements BaseService<Collectable> {
 
     @Override
     @Transactional
-    public Collectable saveOne(Collectable entity) throws Exception {
+    public Collectible saveOne(Collectible entity) throws Exception {
         try {
-            Collectable collectable = repository.save(entity);
-            return collectable;
+            Collectible collectible = repository.save(entity);
+            return collectible;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -50,12 +50,12 @@ public class CollectableService implements BaseService<Collectable> {
 
     @Override
     @Transactional
-    public Collectable updateOne(Collectable entity, long id) throws Exception {
+    public Collectible updateOne(Collectible entity, long id) throws Exception {
         try {
-            Optional<Collectable> opt = repository.findById(id);
-            Collectable collectable = opt.get();
-            collectable = repository.save(entity);
-            return collectable;
+            Optional<Collectible> opt = repository.findById(id);
+            Collectible collectible = opt.get();
+            collectible = repository.save(entity);
+            return collectible;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -65,11 +65,11 @@ public class CollectableService implements BaseService<Collectable> {
     @Transactional
     public boolean deleteById(long id) throws Exception {
         try {
-            Optional<Collectable> opt = repository.findById(id);
+            Optional<Collectible> opt = repository.findById(id);
             if (!opt.isEmpty()) {
-                Collectable collectable = opt.get();
-                collectable.setActive(!collectable.isActive());
-                repository.save(collectable);
+                Collectible collectible = opt.get();
+                collectible.setActive(!collectible.isActive());
+                repository.save(collectible);
             } else {
                 throw new Exception();
             }

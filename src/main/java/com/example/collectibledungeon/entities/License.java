@@ -24,5 +24,5 @@ public class License {
     private boolean active;
 
     @OneToMany(mappedBy = "license")
-    private List<Collectable> collectibles;
+    private List<Collectible> collectibles;
 }

@@ -1,8 +1,6 @@
 package com.example.collectibledungeon.services;
 
-import com.example.collectibledungeon.entities.Collectable;
 import com.example.collectibledungeon.entities.Producer;
-import com.example.collectibledungeon.repositories.CollectableRepository;
 import com.example.collectibledungeon.repositories.ProducerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

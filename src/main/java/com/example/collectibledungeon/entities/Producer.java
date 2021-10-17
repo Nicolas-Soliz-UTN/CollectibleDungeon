@@ -23,5 +23,5 @@ public class Producer {
     private boolean active;
 
     @OneToMany(mappedBy = "producer")
-    private List<Collectable> collectibles;
+    private List<Collectible> collectibles;
 }
