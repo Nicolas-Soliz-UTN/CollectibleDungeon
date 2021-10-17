@@ -1,17 +1,14 @@
 package com.example.collectibledungeon.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Setter
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Collectible {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
