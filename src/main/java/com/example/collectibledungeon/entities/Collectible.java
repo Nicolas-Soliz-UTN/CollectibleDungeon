@@ -15,7 +15,7 @@ public class Collectible {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private String name, description, scale, material;
+    private String name, description, scale, material, image;
     private float height, price;
     private int code, stock;
     private boolean active;
