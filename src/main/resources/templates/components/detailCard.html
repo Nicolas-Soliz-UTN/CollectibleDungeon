@@ -1,0 +1,24 @@
+<div th:fragment="detail_card" class="row mt-5" th:object="${collectible}">
+    <div class="col-4">
+        <img th:src="*{image}" alt="" class="img-fluid">
+    </div>
+    <div class="col-8">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title text-center" th:text="*{name}"></h4>
+                <p class="card-text mt-3" th:text="'Description: ' + *{description}"></p>
+                <p class="card-text" th:text="'Code: ' + *{code}"></p>
+                <p class="card-text" th:text="'Material: ' + *{material}"></p>
+                <p class="card-text" th:text="'Height: ' + *{height}"></p>
+                <p class="card-text" th:text="'Scale: ' + *{scale}"></p>
+                <p class="card-text" th:text="'Stock: ' + *{stock}"></p>
+            </div>
+            <div class="card-footer text-center">
+                <strong><p class="text-muted d-inline me-5" th:text="'Price: $' + ${collectible.price}"></p>
+                </strong>
+                <a th:href="@{/}" class="btn btn-success ms-5">Add to Cart</a>
+                <a th:href="@{/}" class="btn btn-outline-dark ms-5">Go Back</a>
+            </div>
+        </div>
+    </div>
+</div>

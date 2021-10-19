@@ -7,50 +7,9 @@
     <title>Details</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/}">Collectible-Dungeon</a>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/crud}">CRUD</a>
-                </li>
-            </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-        </div>
-    </div>
-</nav>
+<nav th:replace="components/navbar :: nav_bar"></nav>
 <div class="container">
-    <div class="row mt-5" th:object="${collectible}">
-        <div class="col-4">
-            <img th:src="*{image}" alt="" class="img-fluid">
-        </div>
-        <div class="col-8">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title text-center" th:text="*{name}"></h4>
-                    <p class="card-text mt-3" th:text="'Description: ' + *{description}"></p>
-                    <p class="card-text" th:text="'Code: ' + *{code}"></p>
-                    <p class="card-text" th:text="'Material: ' + *{material}"></p>
-                    <p class="card-text" th:text="'Height: ' + *{height}"></p>
-                    <p class="card-text" th:text="'Scale: ' + *{scale}"></p>
-                    <p class="card-text" th:text="'Stock: ' + *{stock}"></p>
-                </div>
-                <div class="card-footer text-center">
-                    <strong><p class="text-muted d-inline me-5" th:text="'Price: $' + ${collectible.price}"></p>
-                    </strong>
-                    <a th:href="@{/}" class="btn btn-success ms-5">Add to Cart</a>
-                    <a th:href="@{/}" class="btn btn-outline-dark ms-5">Go Back</a>
-                </div>
-            </div>
-        </div>
-    </div>
+<div th:replace="components/detailCard :: detail_card"></div>
 </div>
 </body>
 </html>
