@@ -9,14 +9,14 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/index}">Navbar</a>
+        <a class="navbar-brand" th:href="@{/}">Collectible Dungeon</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/index}">Home</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/crud}">Link</a>
+                    <a class="nav-link" th:href="@{/}">CRUD</a>
                 </li>
             </ul>
             <form class="d-flex">
@@ -38,8 +38,8 @@
                         additional content. This content is a little bit longer.</p>
                 </div>
                 <div class="card-footer text-center">
-                    <small class="text-muted" th:text="'Price: $' + ${collectible.price}">Last updated 3 mins
-                        ago</small>
+                    <strong><p class="text-muted" th:text="'Price: $' + ${collectible.price}">Last updated 3 mins
+                        ago</p></strong>
                 </div>
             </div>
         </div>
