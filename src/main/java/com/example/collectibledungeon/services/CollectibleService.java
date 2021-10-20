@@ -98,4 +98,14 @@ public class CollectibleService implements BaseService<Collectible> {
             throw new Exception(e.getMessage());
         }
     }
+
+    @Transactional
+    public List<Collectible> findAllByName(String q) throws Exception {
+        try {
+            List<Collectible> collectibles = repository.findByName(q);
+            return collectibles;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
 }

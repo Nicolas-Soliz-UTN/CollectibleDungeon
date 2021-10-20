@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -35,6 +36,18 @@ public class CollectibleController {
             Collectible collectible = collectibleService.findAllByIdAndActive(id);
             model.addAttribute("collectible", collectible);
             return "views/details";
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "error";
+        }
+    }
+
+    @GetMapping(value = "/search")
+    public String collectibleSearch(Model model, @RequestParam(value = "query", required = false) String q) {
+        try {
+            List<Collectible> collectibles = collectibleService.findAllByName(q);
+            model.addAttribute("collectibles", collectibles);
+            return "views/search";
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
             return "error";

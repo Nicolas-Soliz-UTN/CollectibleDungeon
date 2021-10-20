@@ -16,4 +16,7 @@ public interface CollectibleRepository extends JpaRepository<Collectible, Long> 
 
     @Query(value = "SELECT * FROM collectible WHERE collectible.active = true && collectible.id = :id", nativeQuery = true)
     Optional<Collectible> findAllByIdAndActive(@Param("id") long id);
+
+    @Query(value = "SELECT * FROM collectible WHERE collectible.name LIKE %:q% AND collectible.active = true", nativeQuery = true)
+    List<Collectible> findByName(@Param("q") String q);
 }
