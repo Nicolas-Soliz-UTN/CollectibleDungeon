@@ -53,4 +53,16 @@ public class CollectibleController {
             return "error";
         }
     }
+
+    @GetMapping(value = "/crud")
+    public String collectibleCrud(Model model) {
+        try {
+            List<Collectible> collectibles = collectibleService.findAll();
+            model.addAttribute("collectibles", collectibles);
+            return "views/crud";
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "error";
+        }
+    }
 }
