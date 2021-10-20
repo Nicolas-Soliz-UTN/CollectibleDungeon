@@ -2,6 +2,8 @@ package com.example.collectibledungeon.controllers;
 
 import com.example.collectibledungeon.entities.Collectible;
 import com.example.collectibledungeon.services.CollectibleService;
+import com.example.collectibledungeon.services.LicenseService;
+import com.example.collectibledungeon.services.ProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,12 @@ public class CollectibleController {
 
     @Autowired
     CollectibleService collectibleService;
+
+    @Autowired
+    LicenseService licenseService;
+
+    @Autowired
+    ProducerService producerService;
 
     @GetMapping(value = "/")
     public String index(Model model) {
@@ -60,6 +68,23 @@ public class CollectibleController {
             List<Collectible> collectibles = collectibleService.findAll();
             model.addAttribute("collectibles", collectibles);
             return "views/crud";
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "error";
+        }
+    }
+
+    @GetMapping(value = "/form/{id}")
+    public String collectibleForm(Model model, @PathVariable("id") long id) {
+        try {
+            model.addAttribute("producers", producerService.findAll());
+            model.addAttribute("licenses", licenseService.findAll());
+            if (id == 0) {
+                model.addAttribute("collectible", new Collectible());
+            } else {
+                model.addAttribute("collectible", collectibleService.findById(id));
+            }
+            return "views/form";
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
             return "error";

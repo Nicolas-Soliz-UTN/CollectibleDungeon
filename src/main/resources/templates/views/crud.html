@@ -9,6 +9,14 @@
 <body>
 <nav th:replace="components/navbar :: nav_bar"></nav>
 <div class="container">
+    <div class="row mt-5">
+        <div class="col-3">
+            <h4>Collectible CRUD</h4>
+        </div>
+        <div class="col-9">
+            <a th:href="@{/form/0}" class="btn btn-success">Add Collectible</a>
+        </div>
+    </div>
     <div class="row">
         <div class="col-12">
             <table class="table">
@@ -23,15 +31,16 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="collectible : ${collectibles}" th:classappend="${collectible.active} ? table-success : table-danger">
+                <tr th:each="collectible : ${collectibles}"
+                    th:classappend="${collectible.active} ? table-success : table-danger">
                     <td th:text="${collectible.id}"></td>
                     <td th:text="${collectible.code}"></td>
                     <td th:text="${collectible.name}"></td>
                     <td th:text="${collectible.price}"></td>
                     <td th:text="${collectible.stock}"></td>
                     <td>
-                        <a href="" class="btn btn-warning">Edit</a>
-                        <a href="" class="btn btn-danger">Delete</a>
+                        <a th:href="@{/form/{id}(id=${collectible.id})}" class="btn btn-warning">Edit</a>
+                        <a th:href="@{/delete/{id}(id=${collectible.id})}" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
                 </tbody>
