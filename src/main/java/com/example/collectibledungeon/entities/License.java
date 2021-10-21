@@ -6,19 +6,19 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class License {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long id;
+    private long id;
 
     private String name, founder, owner, country;
     private int year;
-    private boolean active;
+    private boolean active = true;
 
     @OneToMany(mappedBy = "license")
     private List<Collectible> collectibles;

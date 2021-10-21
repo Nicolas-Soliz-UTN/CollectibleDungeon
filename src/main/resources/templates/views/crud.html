@@ -40,7 +40,7 @@
                     <td th:text="${collectible.stock}"></td>
                     <td>
                         <a th:href="@{/form/{id}(id=${collectible.id})}" class="btn btn-warning">Edit</a>
-                        <a th:href="@{/delete/{id}(id=${collectible.id})}" class="btn btn-danger">Delete</a>
+                        <a th:if="${collectible.active}" th:href="@{delete/form/{id}(id=${collectible.id})}" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
                 </tbody>

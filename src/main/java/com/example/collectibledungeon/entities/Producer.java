@@ -6,18 +6,18 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class Producer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long id;
+    private long id;
 
     private String name, country;
-    private boolean active;
+    private boolean active = true;
 
     @OneToMany(mappedBy = "producer")
     private List<Collectible> collectibles;

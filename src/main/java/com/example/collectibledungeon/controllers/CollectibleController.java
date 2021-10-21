@@ -5,13 +5,15 @@ import com.example.collectibledungeon.services.CollectibleService;
 import com.example.collectibledungeon.services.LicenseService;
 import com.example.collectibledungeon.services.ProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Calendar;
 import java.util.List;
 
 @Controller
@@ -85,6 +87,53 @@ public class CollectibleController {
                 model.addAttribute("collectible", collectibleService.findById(id));
             }
             return "views/form";
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "error";
+        }
+    }
+
+    @PostMapping(value = "/form/{id}")
+    public String saveCollectible(@RequestParam("archive") MultipartFile archive, @ModelAttribute("collectible") Collectible collectible, Model model, @PathVariable("id") long id) {
+        try {
+            String path = "C://Users//Carlos//Pictures//CollectibleDungeon//Images";
+            int index = archive.getOriginalFilename().indexOf(".");
+            String extension = "." + archive.getOriginalFilename().substring(index + 1);
+            String imageName = Calendar.getInstance().getTimeInMillis() + extension;
+            Path absolutePath = id != 0 ? Paths.get(path + "//" + collectible.getImage()) : Paths.get(path + "//" + imageName);
+            if (id == 0) {
+                Files.write(absolutePath, archive.getBytes());
+                collectible.setImage(imageName);
+                collectibleService.saveOne(collectible);
+            } else {
+                if (!archive.isEmpty()) {
+                    Files.write(absolutePath, archive.getBytes());
+                }
+                collectibleService.updateOne(collectible, id);
+            }
+            return "redirect:/crud";
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "error";
+        }
+    }
+
+    @GetMapping(value = "/delete/form/{id}")
+    public String deleteCollectible(Model model, @PathVariable("id") long id) {
+        try {
+            model.addAttribute("collectible", collectibleService.findById(id));
+            return "views/delete";
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "error";
+        }
+    }
+
+    @PostMapping(value = "/delete/form/{id}")
+    public String deactivateCollectible(Model model, @PathVariable("id") long id) {
+        try {
+            collectibleService.deleteById(id);
+            return "redirect:/crud";
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
             return "error";

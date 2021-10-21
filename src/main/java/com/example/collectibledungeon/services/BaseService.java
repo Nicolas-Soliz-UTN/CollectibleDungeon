@@ -1,6 +1,5 @@
 package com.example.collectibledungeon.services;
 
-import javax.persistence.Entity;
 import java.util.List;
 
 public interface BaseService<E> {
