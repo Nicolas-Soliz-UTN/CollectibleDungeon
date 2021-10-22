@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -97,23 +96,18 @@ public class CollectibleController {
     @PostMapping(value = "/form/{id}")
     public String saveCollectible(@RequestParam("archive") MultipartFile archive, @ModelAttribute("collectible") Collectible collectible, Model model, @PathVariable("id") long id) {
         try {
-            String path = "C://CollectibleDungeon//Images//";
-            int index = archive.getOriginalFilename().indexOf(".");
-            String extension = "." + archive.getOriginalFilename().substring(index + 1);
-            String imageName = Calendar.getInstance().getTimeInMillis() + extension;
-            Path absolutePath;
-
-            if (id == 0) {
+            if (!archive.isEmpty()) {
+                String path = "C://CollectibleDungeon//Images//";
+                int index = archive.getOriginalFilename().indexOf(".");
+                String extension = "." + archive.getOriginalFilename().substring(index + 1);
+                String imageName = Calendar.getInstance().getTimeInMillis() + extension;
+                Path absolutePath = Paths.get(path + imageName);
                 collectible.setImage(imageName);
-                absolutePath = Paths.get(path + imageName);
                 Files.write(absolutePath, archive.getBytes());
+            }
+            if (id == 0) {
                 collectibleService.saveOne(collectible);
             } else {
-                if (!archive.isEmpty()) {
-                    collectible.setImage(imageName);
-                    absolutePath = Paths.get(path + imageName);
-                    Files.write(absolutePath, archive.getBytes());
-                }
                 collectibleService.updateOne(collectible, id);
             }
             return "redirect:/crud";
