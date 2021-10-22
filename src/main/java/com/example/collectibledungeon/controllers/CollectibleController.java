@@ -96,7 +96,7 @@ public class CollectibleController {
     @PostMapping(value = "/form/{id}")
     public String saveCollectible(@RequestParam("archive") MultipartFile archive, @ModelAttribute("collectible") Collectible collectible, Model model, @PathVariable("id") long id) {
         try {
-            String path = "C://Users//Carlos//Pictures//CollectibleDungeon//Images";
+            String path = "C://CollectibleDungeon//images";
             int index = archive.getOriginalFilename().indexOf(".");
             String extension = "." + archive.getOriginalFilename().substring(index + 1);
             String imageName = Calendar.getInstance().getTimeInMillis() + extension;
@@ -107,6 +107,7 @@ public class CollectibleController {
                 collectibleService.saveOne(collectible);
             } else {
                 if (!archive.isEmpty()) {
+
                     Files.write(absolutePath, archive.getBytes());
                 }
                 collectibleService.updateOne(collectible, id);
