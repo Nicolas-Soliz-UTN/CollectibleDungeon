@@ -1,6 +1,6 @@
 <div th:fragment="_card" class="col" th:each="collectible : ${collectibles}">
     <div class="card h-100">
-        <img th:src="@{'/images/' + ${collectible.image}}" class="card-img-top" alt="...">
+        <img th:src="@{'/Images/' + ${collectible.image}}" class="card-img-top" alt="...">
         <div class="card-body">
             <h5 class="card-title" th:text="${collectible.name}"></h5>
             <p class="card-text" th:text="${collectible.description}"></p>

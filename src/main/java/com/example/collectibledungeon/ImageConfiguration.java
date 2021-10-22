@@ -10,6 +10,6 @@ public class ImageConfiguration implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         WebMvcConfigurer.super.addResourceHandlers(registry);
-        registry.addResourceHandler("/images/**").addResourceLocations("file:/C:/CollectibleDungeon/images/");
+        registry.addResourceHandler("/Images/**").addResourceLocations("file:/C:/CollectibleDungeon/Images/");
     }
 }

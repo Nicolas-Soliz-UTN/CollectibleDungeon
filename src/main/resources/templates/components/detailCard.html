@@ -1,6 +1,6 @@
 <div th:fragment="detail_card" class="row mt-5" th:object="${collectible}">
     <div class="col-4">
-        <img th:src="*{image}" alt="" class="img-fluid">
+        <img th:src="@{'/Images/'+ *{image}}" alt="" class="img-fluid">
     </div>
     <div class="col-8">
         <div class="card">
